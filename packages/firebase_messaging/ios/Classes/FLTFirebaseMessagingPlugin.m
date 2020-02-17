@@ -328,7 +328,7 @@ completionHandler:(void (^)(void))completionHandler
 }
 - (void)registerForNotification {
     
-    
+    NSLog(@" PUSH REGISTER");
     // type 0
     UIMutableUserNotificationAction* declineAction = [[UIMutableUserNotificationAction alloc] init];
     [declineAction setIdentifier:@"decline_action_id"];
