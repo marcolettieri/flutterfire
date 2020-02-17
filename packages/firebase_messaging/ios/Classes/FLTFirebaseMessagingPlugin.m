@@ -387,10 +387,13 @@ completionHandler:(void (^)(void))completionHandler
     [declineReplyCategory5 setActions:@[confirm] forContext:UIUserNotificationActionContextDefault];
 
     //[declineReplyCategory setActions:@[replyAction] forContext:UIUserNotificationActionContextDefault];
-    NSSet* categories = [NSSet setWithArray:@[declineReplyCategory,declineReplyCategory3,declineReplyCategory5]];
+    NSSet* categories = [NSSet setWithArray:@[declineReplyCategory2,declineReplyCategory,declineReplyCategory3,declineReplyCategory5]];
     UIUserNotificationSettings* settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:categories];
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-        
+    /*UNNotificationAction *action = [UNNotificationAction actionWithIdentifier: @"2_push" title:@”Snooze!” options:@[]];
+    UNNotificationCategory *category = [UNNotificationCategory categoryWithIdentifier: @”myCategory” actions:@[action] intentIdentifiers:@[]  hiddenPreviewsBodyPlaceholder:@"Snooze"  options: @[]];
+    [[UNUserNotificationCenter currentNotificationCenter] setNotificationCategories: [NSSet setWithObject: category]];
+    */
     
 }
 @end
