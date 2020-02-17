@@ -399,7 +399,7 @@ completionHandler:(void (^)(void))completionHandler
     //[declineReplyCategory setActions:@[replyAction] forContext:UIUserNotificationActionContextDefault];
     NSSet* categories = [NSSet setWithArray:@[declineReplyCategory2,declineReplyCategory,declineReplyCategory3,declineReplyCategory5]];
     //UIUserNotificationSettings* settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:categories];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    //[[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     [[UNUserNotificationCenter currentNotificationCenter] setNotificationCategories: categories];
     
     
