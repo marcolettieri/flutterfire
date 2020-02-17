@@ -358,16 +358,16 @@ completionHandler:(void (^)(void))completionHandler
     // end type 0
     
     // type 2
-   /* UIMutableUserNotificationAction* open = [[UIMutableUserNotificationAction alloc] init];
+    UIMutableUserNotificationAction* open = [[UIMutableUserNotificationAction alloc] init];
     [open setIdentifier:@"open_action_id"];
-    [open setTitle:@"Apri"];
+    [open setTitle:@"Apriiii"];
     [open setActivationMode:UIUserNotificationActivationModeBackground];
     [open setDestructive:NO];
      // end type 2
     UIMutableUserNotificationCategory* declineReplyCategory2 = [[UIMutableUserNotificationCategory alloc] init];
     [declineReplyCategory2 setIdentifier:@"2_push"];
     [declineReplyCategory2 setActions:@[open] forContext:UIUserNotificationActionContextDefault];
-    */
+    
     
     // type 3
     UIMutableUserNotificationAction* confirm = [[UIMutableUserNotificationAction alloc] init];
