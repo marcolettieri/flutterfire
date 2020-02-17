@@ -215,6 +215,7 @@ static NSObject<FlutterPluginRegistrar> *_registrar;
   }
 }
 
+
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
     didReceiveNotificationResponse:(UNNotificationResponse *)response
              withCompletionHandler:(void (^)(void))completionHandler NS_AVAILABLE_IOS(10.0) {
@@ -360,7 +361,8 @@ completionHandler:(void (^)(void))completionHandler
     [declineReplyCategory setActions:@[replyAction, declineAction] forContext:UIUserNotificationActionContextDefault];
     // end type 0
     
-    // type 2
+    /*
+     // type 2
     UIMutableUserNotificationAction* open = [[UIMutableUserNotificationAction alloc] init];
     [open setIdentifier:@"open_action_id"];
     [open setTitle:@"Apri"];
@@ -370,9 +372,13 @@ completionHandler:(void (^)(void))completionHandler
      // end type 2
     UIMutableUserNotificationCategory* declineReplyCategory2 = [[UIMutableUserNotificationCategory alloc] init];
     [declineReplyCategory2 setIdentifier:@"2_push"];
-    [declineReplyCategory2 setActions:@[open] forContext:UIUserNotificationActionContextDefault];
+    [declineReplyCategory2 setActions:@[open] forContext:UIUserNotificationActionContextDefault];*/
     
-    
+    UNNotificationAction *open = [UNNotificationAction actionWithIdentifier:@"open_action_id"
+    title:@"Apri" options:UNNotificationActionOptionNone];
+    UNNotificationCategory *declineReplyCategory2 = [UNNotificationCategory categoryWithIdentifier:@"2_push"
+    actions:@[open] intentIdentifiers:@[] options:UNNotificationCategoryOptionNone];
+
     // type 3
     UIMutableUserNotificationAction* confirm = [[UIMutableUserNotificationAction alloc] init];
     [confirm setIdentifier:@"confirm_action_id"];
@@ -392,7 +398,7 @@ completionHandler:(void (^)(void))completionHandler
 
     //[declineReplyCategory setActions:@[replyAction] forContext:UIUserNotificationActionContextDefault];
     NSSet* categories = [NSSet setWithArray:@[declineReplyCategory2,declineReplyCategory,declineReplyCategory3,declineReplyCategory5]];
-    UIUserNotificationSettings* settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:categories];
+    //UIUserNotificationSettings* settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:categories];
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     [[UNUserNotificationCenter currentNotificationCenter] setNotificationCategories: categories];
     
