@@ -215,16 +215,19 @@ static NSObject<FlutterPluginRegistrar> *_registrar;
   }
 }
 
-/*- (void)userNotificationCenter:(UNUserNotificationCenter *)center
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center
     didReceiveNotificationResponse:(UNNotificationResponse *)response
              withCompletionHandler:(void (^)(void))completionHandler NS_AVAILABLE_IOS(10.0) {
+    NSLog(@" PUSH INFO %@", response);
   NSDictionary *userInfo = response.notification.request.content.userInfo;
+    NSLog(@" PUSH INFO2 %@", response);
   // Check to key to ensure we only handle messages from Firebase
   if (userInfo[kGCMMessageIDKey]) {
     [_channel invokeMethod:@"onResume" arguments:userInfo];
     completionHandler();
   }
-}*/
+    
+}
 
 #endif
 
@@ -391,10 +394,8 @@ completionHandler:(void (^)(void))completionHandler
     NSSet* categories = [NSSet setWithArray:@[declineReplyCategory2,declineReplyCategory,declineReplyCategory3,declineReplyCategory5]];
     UIUserNotificationSettings* settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:categories];
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    /*UNNotificationAction *action = [UNNotificationAction actionWithIdentifier: @"2_push" title:@”Snooze!” options:@[]];
-    UNNotificationCategory *category = [UNNotificationCategory categoryWithIdentifier: @”myCategory” actions:@[action] intentIdentifiers:@[]  hiddenPreviewsBodyPlaceholder:@"Snooze"  options: @[]];
-    [[UNUserNotificationCenter currentNotificationCenter] setNotificationCategories: [NSSet setWithObject: category]];
-    */
+    [[UNUserNotificationCenter currentNotificationCenter] setNotificationCategories: categories];
+    
     
 }
 @end
