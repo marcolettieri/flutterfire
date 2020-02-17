@@ -215,7 +215,7 @@ static NSObject<FlutterPluginRegistrar> *_registrar;
   }
 }
 
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center
+/*- (void)userNotificationCenter:(UNUserNotificationCenter *)center
     didReceiveNotificationResponse:(UNNotificationResponse *)response
              withCompletionHandler:(void (^)(void))completionHandler NS_AVAILABLE_IOS(10.0) {
   NSDictionary *userInfo = response.notification.request.content.userInfo;
@@ -224,7 +224,7 @@ static NSObject<FlutterPluginRegistrar> *_registrar;
     [_channel invokeMethod:@"onResume" arguments:userInfo];
     completionHandler();
   }
-}
+}*/
 
 #endif
 
@@ -360,7 +360,8 @@ completionHandler:(void (^)(void))completionHandler
     // type 2
     UIMutableUserNotificationAction* open = [[UIMutableUserNotificationAction alloc] init];
     [open setIdentifier:@"open_action_id"];
-    [open setTitle:@"Apriiii"];
+    [open setTitle:@"Apri"];
+    [open setAuthenticationRequired:NO];
     [open setActivationMode:UIUserNotificationActivationModeBackground];
     [open setDestructive:NO];
      // end type 2
