@@ -241,6 +241,7 @@ static NSObject<FlutterPluginRegistrar> *_registrar;
   if (launchOptions != nil) {
     _launchNotification = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
   }
+  [self registerForNotification];
   return YES;
 }
 
@@ -309,4 +310,85 @@ static NSObject<FlutterPluginRegistrar> *_registrar;
   [_channel invokeMethod:@"onMessage" arguments:remoteMessage.appData];
 }
 
+-(void)application:(UIApplication *)application
+handleActionWithIdentifier:(NSString *)identifier
+forLocalNotification:(UILocalNotification *)notification
+completionHandler:(void (^)(void))completionHandler
+{
+       NSLog(@" PUSH ACTION IDENTIFIER %@", identifier);
+
+}
+
+- (void)application:(UIApplication *)application
+   handleActionWithIdentifier:(NSString *)identifier
+   forRemoteNotification:(NSDictionary *)userInfo
+   completionHandler:(void (^)(void))completionHandler
+{
+   NSLog(@" PUSH IDENTIFIER %@", identifier);
+}
+- (void)registerForNotification {
+    
+    
+    // type 0
+    UIMutableUserNotificationAction* declineAction = [[UIMutableUserNotificationAction alloc] init];
+    [declineAction setIdentifier:@"decline_action_id"];
+    [declineAction setTitle:NSLocalizedString(@"notexecute",@"notexecute")];
+    [declineAction setActivationMode:UIUserNotificationActivationModeBackground];
+    [declineAction setDestructive:NO];
+    [declineAction setAuthenticationRequired:YES];
+    UIMutableUserNotificationAction* replyAction = [[UIMutableUserNotificationAction alloc] init];
+    [replyAction setIdentifier:@"send_action_id"];
+    [replyAction setTitle:NSLocalizedString(@"execute",@"execute")];
+    [replyAction setActivationMode:UIUserNotificationActivationModeBackground];
+    [replyAction setDestructive:NO];
+    [replyAction setAuthenticationRequired:YES];
+    
+    /*UIMutableUserNotificationAction* remind = [[UIMutableUserNotificationAction alloc] init];
+    [remind setIdentifier:@"remind_action_id"];
+    [remind setTitle:@"Ricordamelo dopo!"];
+    [remind setActivationMode:UIUserNotificationActivationModeBackground];
+    [remind setDestructive:YES];*/
+
+    
+    UIMutableUserNotificationCategory* declineReplyCategory = [[UIMutableUserNotificationCategory alloc] init];
+    [declineReplyCategory setIdentifier:@"0_push"];
+    [declineReplyCategory setActions:@[replyAction, declineAction] forContext:UIUserNotificationActionContextDefault];
+    // end type 0
+    
+    // type 2
+   /* UIMutableUserNotificationAction* open = [[UIMutableUserNotificationAction alloc] init];
+    [open setIdentifier:@"open_action_id"];
+    [open setTitle:@"Apri"];
+    [open setActivationMode:UIUserNotificationActivationModeBackground];
+    [open setDestructive:NO];
+     // end type 2
+    UIMutableUserNotificationCategory* declineReplyCategory2 = [[UIMutableUserNotificationCategory alloc] init];
+    [declineReplyCategory2 setIdentifier:@"2_push"];
+    [declineReplyCategory2 setActions:@[open] forContext:UIUserNotificationActionContextDefault];
+    */
+    
+    // type 3
+    UIMutableUserNotificationAction* confirm = [[UIMutableUserNotificationAction alloc] init];
+    [confirm setIdentifier:@"confirm_action_id"];
+    [confirm setTitle:NSLocalizedString(@"confirm",@"confirm")];
+    [confirm setActivationMode:UIUserNotificationActivationModeBackground];
+    [confirm setDestructive:NO];
+    [confirm setAuthenticationRequired:YES];
+    // end type 3
+    
+    UIMutableUserNotificationCategory* declineReplyCategory3 = [[UIMutableUserNotificationCategory alloc] init];
+    [declineReplyCategory3 setIdentifier:@"3_push"];
+    [declineReplyCategory3 setActions:@[confirm] forContext:UIUserNotificationActionContextDefault];
+    
+    UIMutableUserNotificationCategory* declineReplyCategory5 = [[UIMutableUserNotificationCategory alloc] init];
+    [declineReplyCategory5 setIdentifier:@"5_push"];
+    [declineReplyCategory5 setActions:@[confirm] forContext:UIUserNotificationActionContextDefault];
+
+    //[declineReplyCategory setActions:@[replyAction] forContext:UIUserNotificationActionContextDefault];
+    NSSet* categories = [NSSet setWithArray:@[declineReplyCategory,declineReplyCategory3,declineReplyCategory5]];
+    UIUserNotificationSettings* settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:categories];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+        
+    
+}
 @end
