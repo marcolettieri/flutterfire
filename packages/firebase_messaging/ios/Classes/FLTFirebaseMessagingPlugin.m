@@ -59,6 +59,8 @@ static NSObject<FlutterPluginRegistrar> *_registrar;
       NSLog(@"Configured the default Firebase app %@.", [FIRApp defaultApp].name);
     }
     [FIRMessaging messaging].delegate = self;
+    [self registerForNotification];
+
   }
   return self;
 }
