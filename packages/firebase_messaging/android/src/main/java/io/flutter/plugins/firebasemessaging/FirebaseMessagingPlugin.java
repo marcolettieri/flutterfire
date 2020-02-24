@@ -293,7 +293,7 @@ public class FirebaseMessagingPlugin extends BroadcastReceiver
 
   @Override
   public boolean onNewIntent(Intent intent) {
-    boolean res = true;//sendMessageFromIntent("onResume", intent);
+    boolean res = sendMessageFromIntent("onResume", intent);
     if (res && mainActivity != null) {
       mainActivity.setIntent(intent);
     }
@@ -302,6 +302,9 @@ public class FirebaseMessagingPlugin extends BroadcastReceiver
 
   /** @return true if intent contained a message to send. */
   private boolean sendMessageFromIntent(String method, Intent intent) {
+    /*if (CLICK_ACTION_VALUE.equals(intent.getAction())
+        || CLICK_ACTION_VALUE.equals(intent.getStringExtra("click_action"))) {*/
+    if(intent.getAction()!=null && intent.getAction().contains("_push")){
       Map<String, Object> message = new HashMap<>();
       Bundle extras = intent.getExtras();
 
@@ -325,4 +328,6 @@ public class FirebaseMessagingPlugin extends BroadcastReceiver
       channel.invokeMethod(method, message);
       return true;
     }
+    return false;
+  }
 }
