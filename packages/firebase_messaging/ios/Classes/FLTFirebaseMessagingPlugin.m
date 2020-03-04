@@ -219,9 +219,9 @@ static NSObject<FlutterPluginRegistrar> *_registrar;
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
     didReceiveNotificationResponse:(UNNotificationResponse *)response
              withCompletionHandler:(void (^)(void))completionHandler NS_AVAILABLE_IOS(10.0) {
-    NSLog(@" PUSH INFO %@", response);
+    //NSLog(@" PUSH INFO %@", response);
   NSDictionary *userInfo = response.notification.request.content.userInfo;
-    NSLog(@" PUSH INFO2 %@", response);
+    //NSLog(@" PUSH INFO2 %@", response);
   // Check to key to ensure we only handle messages from Firebase
   if (userInfo[kGCMMessageIDKey]) {
     [_channel invokeMethod:@"onResume" arguments:userInfo];
@@ -321,7 +321,7 @@ handleActionWithIdentifier:(NSString *)identifier
 forLocalNotification:(UILocalNotification *)notification
 completionHandler:(void (^)(void))completionHandler
 {
-       NSLog(@" PUSH ACTION IDENTIFIER %@", identifier);
+       //NSLog(@" PUSH ACTION IDENTIFIER %@", identifier);
 
 }
 
@@ -330,11 +330,11 @@ completionHandler:(void (^)(void))completionHandler
    forRemoteNotification:(NSDictionary *)userInfo
    completionHandler:(void (^)(void))completionHandler
 {
-   NSLog(@" PUSH IDENTIFIER %@", identifier);
+   //NSLog(@" PUSH IDENTIFIER %@", identifier);
 }
 - (void)registerForNotification {
     
-    NSLog(@" PUSH REGISTER");
+    //NSLog(@" PUSH REGISTER");
     // type 0
     UIMutableUserNotificationAction* declineAction = [[UIMutableUserNotificationAction alloc] init];
     [declineAction setIdentifier:@"decline_action_id"];
